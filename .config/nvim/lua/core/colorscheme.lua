@@ -1,0 +1,21 @@
+vim.cmd.colorscheme "kanagawa"
+-- vim.cmd.colorscheme "monokai"
+-- vim.cmd.colorscheme "moonfly"
+-- vim.cmd.colorscheme "sonokai"
+-- vim.cmd.colorscheme "monokai_pro"
+-- vim.cmd.colorscheme "srcery"
+-- vim.cmd.colorscheme "PaperColor"
+-- vim.cmd.colorscheme "jellybeans"
+-- vim.cmd([[
+--   let g:gruvbox_italic=1
+--   let g:gruvbox_contrast_dark='hard'
+-- ]])
+-- vim.cmd.colorscheme "gruvbox"
+-- vim.cmd.colorscheme "badwolf"
+-- vim.cmd.colorscheme "hybrid"
+-- vim.cmd.colorscheme "tokyonight-night"
+-- vim.cmd.colorscheme "gruvbox-material"
+-- vim.cmd.colorscheme "codedark"
+-- vim.cmd.colorscheme "catppuccin-mocha"
+-- vim.cmd.colorscheme "neon"
+-- vim.cmd.colorscheme "ayu"
