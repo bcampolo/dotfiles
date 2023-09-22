@@ -2,7 +2,8 @@ local treesitter = require('nvim-treesitter.configs')
 
 treesitter.setup({
   highlight = {
-    enable = true
+    enable = true,
+    disable = { "r" }, -- list of language name (not extension) that will be disabled
   },
   indent = { enable = true },
   autotag = { enable = true };

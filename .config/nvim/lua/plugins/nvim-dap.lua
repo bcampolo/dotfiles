@@ -124,6 +124,20 @@ dap.configurations.java = {
       "-Dstarshipempire.steam.api.appid=1882170 " ..
       "-Dstarshipempire.port=8080 " ..
       "-Dstarshipempire.shared.path=/home/bcampolo/git/starshipempire/shared "
-  }
+  },
+  {
+    name = "Debug Attach (8001)";
+    type = 'java';
+    request = 'attach';
+    hostName = "127.0.0.1";
+    port = 8001;
+  },
+  {
+    name = "Debug (12GB)";
+    type = 'java';
+    request = 'launch';
+    vmArgs = "" ..
+      "-Xmx12g "
+  },
 }
 

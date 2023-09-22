@@ -1,4 +1,5 @@
 SSE_SERVER_ID = 0
+JOB_ID = 0
 local P = {}
 keymaps = P
 
@@ -61,12 +62,6 @@ keymap.set("n", "<leader>h7", function() ui.nav_file(7) end)
 keymap.set("n", "<leader>h8", function() ui.nav_file(8) end)
 keymap.set("n", "<leader>h9", function() ui.nav_file(9) end)
 
--- Java LSP - jdtls
-function P.map_java_keys(bufnr)
-  map_lsp_keys()
-  -- keymap.set("n", "<leader>ew", ":lua require('jdtls').organize_imports()<CR>")
-end
-
 -- Starship Empire
 -- client
 keymap.set("n", "<leader>xc", function()
@@ -124,6 +119,55 @@ keymap.set("n", "<leader>xs", function()
   })
 end)
 
+-- Hutter
+-- stop
+keymap.set("n", "<leader>xx", function()
+  vim.fn.jobstop(JOB_ID)
+end)
+
+-- start
+keymap.set("n", "<leader>xh", function()
+  -- kill existing server
+  vim.fn.jobstop(JOB_ID)
+  -- build jar using gradle
+  vim.fn.jobstart({
+    "sh",
+    "/home/bcampolo/git/hutter/gradlew",
+    "build"
+  }, {
+    stdout_buffered = true,
+    -- on_stdout = function (_, data)
+    --   if data then
+    --     print(dump(data))
+    --   end
+    -- end,
+    stderr_buffered = true,
+    on_stderr = function (_, data)
+      if data then
+        print(dump(data))
+      end
+    end,
+   -- if successful, then start server
+    on_exit = function(_, data)
+      if vim.api.nvim_get_vvar("shell_error") == 0 then
+        JOB_ID = vim.fn.jobstart({
+          "java",
+          "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8001",
+          "-cp",
+          "/home/bcampolo/git/hutter/build/libs/hutter.jar:/home/bcampolo/git/hutter/build/libs/dependencies.jar",
+          "-Xmx12g",
+          "com.bcampolo.hutter.Hutter",
+          "/home/bcampolo/git/hutter/data/enwik9-10"
+        }, {
+          stdout_buffered = true,
+          stderr_buffered = true
+        })
+      end
+    end
+  })
+end)
+
+
 function dump(o)
    if type(o) == 'table' then
       local s = '{ '
@@ -135,5 +179,11 @@ function dump(o)
    else
       return tostring(o)
    end
+end
+
+-- Java LSP - jdtls
+function P.map_java_keys(bufnr)
+  map_lsp_keys()
+  -- keymap.set("n", "<leader>ew", ":lua require('jdtls').organize_imports()<CR>")
 end
 

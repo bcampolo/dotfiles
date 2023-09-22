@@ -32,7 +32,21 @@ return require('packer').startup(function(use)
   use 'szw/vim-maximizer' -- maximize and restore current window
   use 'nvim-tree/nvim-web-devicons' -- icons for file explorer
   use 'nvim-tree/nvim-tree.lua' -- file explorer
-  use 'nvim-lualine/lualine.nvim' -- nvim status line
+  -- lualine status line with LSP progress
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = {
+      'nvim-tree/nvim-web-devicons',
+      'linrongbin16/lsp-progress.nvim',
+    },
+  }
+  use {
+    'linrongbin16/lsp-progress.nvim',
+    requires = {'nvim-tree/nvim-web-devicons'},
+    config = function()
+      require('lsp-progress').setup()
+    end
+  }
   use({ "nvim-telescope/telescope-fzf-native.nvim", run="make" }) -- telescope - performance improvement
   use({ "nvim-telescope/telescope.nvim", branch="0.1.x" }) -- telescope - fuzzy finder
   use 'ThePrimeagen/harpoon' -- harpoon list of favorite files
@@ -113,6 +127,8 @@ return require('packer').startup(function(use)
   -- Vim Tutorial Game
   use 'ThePrimeagen/vim-be-good'
 
+  -- XML Format/Minify
+  use 'j16180339887/XML-fast.vim'
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
