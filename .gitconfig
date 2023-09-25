@@ -1,0 +1,11 @@
+[credential]
+	helper = /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
+[user]
+	email = bjcampolo@gmail.com
+	name = bcampolo
+[mergetool]
+	keepBackup = false
+[difftool]
+	prompt = false
+[diff]
+	tool = bc
