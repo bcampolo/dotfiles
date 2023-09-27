@@ -51,8 +51,6 @@ return require('packer').startup(function(use)
   use({ "nvim-telescope/telescope.nvim", branch="0.1.x" }) -- telescope - fuzzy finder
   use 'ThePrimeagen/harpoon' -- harpoon list of favorite files
   use 'tpope/vim-commentary' -- comment lines of code
-  -- session management
-  --
   -- auto-completion of bracket/paren/quote pairs
   use {
 	"windwp/nvim-autopairs",
@@ -74,6 +72,8 @@ return require('packer').startup(function(use)
   use 'L3MON4D3/LuaSnip'
   use 'saadparwaiz1/cmp_luasnip'
   use 'rafamadriz/friendly-snippets'
+  -- Linting
+  -- use 'mfussenegger/nvim-lint'
   -- LSP server management
   use 'williamboman/mason.nvim'
   use 'williamboman/mason-lspconfig.nvim'
@@ -103,8 +103,10 @@ return require('packer').startup(function(use)
   -- Debugging
   use 'mfussenegger/nvim-dap' -- debug adapter protocol
   use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} } -- debugger ui
-  use 'nvim-telescope/telescope-dap.nvim' -- telescope integration with dap
   use 'theHamsta/nvim-dap-virtual-text' -- inline variable text while debugging
+  use 'nvim-telescope/telescope-dap.nvim' -- telescope integration with dap
+  -- REST / Postman
+  use 'diepm/vim-rest-console'
   -- Theme/Colorscheme
   use 'rebelot/kanagawa.nvim' -- good, but very mellow low-constrast colors - 7.5
   -- use 'NLKNguyen/papercolor-theme'

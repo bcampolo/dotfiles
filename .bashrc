@@ -127,10 +127,13 @@ source /usr/share/doc/fzf/examples/key-bindings.bash
 
 ##### BJC PROMPT ###############################
 export COLOR_WHITE='\[\e[0m\]'
+export COLOR_WHITE_RAW='\e[0m'
 export COLOR_RED='\[\e[0;31m\]'
+export COLOR_RED_RAW='\e[0;31m'
 export COLOR_GREEN='\[\e[0;32m\]'
 export COLOR_YELLOW='\[\e[0;33m\]'
-export COLOR_BLUE='\[\e[1;34m\]'
+export COLOR_BLUE='\[\e[0;34m\]'
+export COLOR_BLUE_BOLD='\[\e[1;34m\]'
 export COLOR_PURPLE='\[\e[1;35m\]'
 
 # Generate fancy prompt
@@ -139,7 +142,7 @@ prompt_command() {
     PS1=""
 
     # Username
-    PS1+="\u@ ${COLOR_BLUE}\W${COLOR_WHITE}"
+    PS1+="\u@ ${COLOR_BLUE_BOLD}\W${COLOR_WHITE}"
 
     # Current Git Branch
     GIT_BRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/')

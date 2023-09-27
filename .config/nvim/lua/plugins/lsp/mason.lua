@@ -14,15 +14,12 @@ mason_lspconfig.setup({
     "groovyls",
     "lua_ls",
     "intelephense",
-    "jedi_language_server",
-    "java_language_server",
     "jdtls",
     "jsonls",
     "lemminx",
     "marksman",
     "quick_lint_js",
-    "sqlls",
     "tsserver",
-    "yamlls",
+    -- "yamlls",
   }
 })

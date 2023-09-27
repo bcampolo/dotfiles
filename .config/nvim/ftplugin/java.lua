@@ -8,6 +8,8 @@ local workspace_dir = '/home/bcampolo/jdtls-workspace/' .. project_name
 local bundles = {
   vim.fn.glob('/home/bcampolo/.local/share/nvim/mason/share/java-debug-adapter/com.microsoft.java.debug.plugin.jar'),
 }
+-- Needed for running/debugging unit tests
+vim.list_extend(bundles, vim.split(vim.fn.glob("/home/bcampolo/git/vscode-java-test/server/*.jar", 1), "\n"))
 
 local config = {
   -- The command that starts the language server
@@ -33,7 +35,7 @@ local config = {
 
   -- This is the default if not provided, you can remove it. Or adjust as needed.
   -- One dedicated LSP server & client will be started per unique root_dir
-  root_dir = require('jdtls.setup').find_root({'.git', 'mvnw', 'pom.xml', 'gradlew'}),
+  root_dir = require('jdtls.setup').find_root({'.git', 'mvnw', 'pom.xml', 'build.gradle'}),
 
   -- Here you can configure eclipse.jdt.ls specific settings
   -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request

@@ -1,4 +1,3 @@
-vim.cmd.colorscheme "kanagawa"
 -- vim.cmd.colorscheme "monokai"
 -- vim.cmd.colorscheme "moonfly"
 -- vim.cmd.colorscheme "sonokai"
@@ -19,3 +18,26 @@ vim.cmd.colorscheme "kanagawa"
 -- vim.cmd.colorscheme "catppuccin-mocha"
 -- vim.cmd.colorscheme "neon"
 -- vim.cmd.colorscheme "ayu"
+
+-- require('kanagawa').setup({
+--   colors = {
+--     palette = {
+--       -- change all usages of these colors
+--       sumiInk0 = "#000000",
+--       fujiWhite = "#FFFFFF",
+--     },
+--     theme = {
+--       -- change specific usages for a certain theme, or for all of them
+--       wave = {
+--         ui = {
+--           diff = {
+--             delete = "#00FF00",
+--           },
+--         },
+--       },
+--     }
+--   },
+-- })
+vim.cmd.colorscheme "kanagawa"
+
+

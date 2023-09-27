@@ -33,8 +33,11 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set('n', '<leader>gl', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
     vim.keymap.set('n', '<leader>gp', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
     vim.keymap.set('n', '<leader>gn', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-    vim.keymap.set('n', '<leader>tr', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', opts)
     vim.keymap.set('i', '<C-Space>', '<cmd>lua vim.lsp.buf.completion()<CR>', opts)
+
+    -- Testing
+    vim.keymap.set("n", "<leader>tc", "<cmd>lua require('jdtls').test_class()<CR>", opts)
+    vim.keymap.set("n", "<leader>tm", "<cmd>lua require('jdtls').test_nearest_method()<CR>", opts)
 
     -- Debugging
     -- nvim-dap
@@ -55,6 +58,7 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", '<leader>d?', function() local widgets = require "dap.ui.widgets"; widgets.centered_float(widgets.scopes) end, opts)
     vim.keymap.set("n", '<leader>df', '<cmd>Telescope dap frames<cr>', opts)
     vim.keymap.set("n", '<leader>dh', '<cmd>Telescope dap commands<cr>', opts)
+    vim.keymap.set("n", '<leader>de', function() builtin.diagnostics({default_text=":E:"}) end, opts)
 end)
 
 lsp.skip_server_setup({'jdtls'})
