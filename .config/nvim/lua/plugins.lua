@@ -107,6 +107,8 @@ return require('packer').startup(function(use)
   use 'nvim-telescope/telescope-dap.nvim' -- telescope integration with dap
   -- REST / Postman
   use 'diepm/vim-rest-console'
+  -- Git
+  use 'f-person/git-blame.nvim'
   -- Theme/Colorscheme
   use 'rebelot/kanagawa.nvim' -- good, but very mellow low-constrast colors - 7.5
   -- use 'NLKNguyen/papercolor-theme'
