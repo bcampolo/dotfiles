@@ -3,9 +3,55 @@
 [user]
 	email = bjcampolo@gmail.com
 	name = bcampolo
-[mergetool]
-	keepBackup = false
+
+[core]
+	autocrlf = false
+	preloadindex = true
+	editor = nvim
+
+[diff]
+	tool = nvimdiff
+	; tool = bc3
+
 [difftool]
 	prompt = false
-[diff]
-	tool = bc
+
+[difftool "bc3"]
+  cmd = "\"/usr/bin/bcompare\"" \"$LOCAL\" \"$REMOTE\"
+
+[difftool "nvimdiff"]
+  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+
+[merge]
+	tool = nvimdiff
+	; tool = bc3
+
+[mergetool]
+	keepBackup = false
+
+[mergetool "bc3"]
+  trustExitCode = true
+  keepBackup = false
+  cmd = "\"/usr/bin/bcompare\"" \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+  #cmd = "\"/usr/bin/bcompare\"" \"$LOCAL\" \"$REMOTE\" \"-savetarget=$MERGED\"
+
+[mergetool "nvimdiff"]
+  ; cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+  layout = "(LOCAL,BASE,REMOTE)/MERGED"
+
+[mergetool "meld"]
+  cmd = "meld --auto-merge \"$LOCAL\" \"$BASE\" \"$REMOTE\" --output \"$MERGED\""
+ 
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+
+[color "status"]
+  added = green bold
+  changed = magenta bold
+  untracked = yellow bold
+
+[cola]
+	spellcheck = false
