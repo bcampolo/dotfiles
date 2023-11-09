@@ -10,7 +10,7 @@ local ensure_packer = function()
 end
 
 local packer_bootstrap = ensure_packer()
- 
+
 -- Autocommand that reloads neovim whenever you save this file
 vim.cmd([[
   augroup packer_user_config
@@ -73,7 +73,7 @@ return require('packer').startup(function(use)
   use 'saadparwaiz1/cmp_luasnip'
   use 'rafamadriz/friendly-snippets'
   -- Linting
-  -- use 'mfussenegger/nvim-lint'
+  use 'mfussenegger/nvim-lint'
   -- LSP server management
   use 'williamboman/mason.nvim'
   use 'williamboman/mason-lspconfig.nvim'
@@ -105,12 +105,29 @@ return require('packer').startup(function(use)
   use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} } -- debugger ui
   use 'theHamsta/nvim-dap-virtual-text' -- inline variable text while debugging
   use 'nvim-telescope/telescope-dap.nvim' -- telescope integration with dap
+
   -- REST / Postman
   use 'diepm/vim-rest-console'
+
   -- Git
   use 'f-person/git-blame.nvim'
+
+  -- ChatGPT
+  use({
+    "jackMort/ChatGPT.nvim",
+    config = function()
+      require("chatgpt").setup()
+    end,
+    requires = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim"
+    }
+  })
+
   -- Theme/Colorscheme
   use 'rebelot/kanagawa.nvim' -- good, but very mellow low-constrast colors - 7.5
+  -- use 'projekt0n/github-nvim-theme'
   -- use 'NLKNguyen/papercolor-theme'
   -- use 'nanotech/jellybeans.vim'
   -- use 'tanvirtin/monokai.nvim' -- good - 7.5

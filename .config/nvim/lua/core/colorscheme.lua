@@ -38,6 +38,21 @@
 --     }
 --   },
 -- })
-vim.cmd.colorscheme "kanagawa"
 
+-- diff
+-- if vim.fn.diff_get('&diff') == 1 then                                                                                                                                 │
+-- vim.cmd.colorscheme "github_dark"
+-- else
+vim.cmd.colorscheme "kanagawa"
+-- end
+-- vim.cmd('hi diffAdded      gui=none    guifg=NONE          guibg=#bada9f')
+-- vim.cmd('hi diffChanged   gui=none    guifg=NONE          guibg=#e5d5ac')
+-- vim.cmd('hi diffDeleted   gui=bold    guifg=#ff8080       guibg=#ffb0b0')
+-- vim.cmd('highlight DiffAdd guifg=#ffffff guibg=00ff00')
+-- vim.cmd('highlight diffAdded guifg=#ffffff guibg=00ff00')
+-- vim.cmd('hi diffText     gui=none    guifg=NONE          guibg=#8cbee2')
+vim.cmd('hi DiffAdd guifg=#00FF00 guibg=#005500')
+vim.cmd('hi DiffDelete guifg=#FF0000 guibg=#550000')
+vim.cmd('hi DiffChange guifg=#FFFFFF guibg=#000055')
+vim.cmd('hi DiffText guifg=#FFFF00 guibg=#550000')
 
