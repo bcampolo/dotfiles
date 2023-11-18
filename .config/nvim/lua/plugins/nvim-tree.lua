@@ -1,21 +1,26 @@
-local nvimtree = require('nvim-tree')
-
--- recommended settings from nvim-tree documentation
-vim.g.loaded = 1
-vim.g.loaded_netrwPlugin = 1
-
-nvimtree.setup({
-  actions = {
-    open_file = {
-      window_picker = {
-        enable = false
-      },
-      -- quit_on_open = true, 
-    }
+-- File explorer
+return {
+  'nvim-tree/nvim-tree.lua',
+  dependencies = {
+    'nvim-tree/nvim-web-devicons',
   },
-  -- filters = {
-  --   custom = { 'client' },
-  -- },
-
-})
+  opts = {
+    actions = {
+      open_file = {
+        window_picker = {
+          enable = false
+        },
+        -- quit_on_open = true, 
+      }
+    },
+    -- filters = {
+    --   custom = { 'client' },
+    -- },
+  },
+  config = function (_, opts)
+    vim.g.loaded = 1
+    vim.g.loaded_netrwPlugin = 1
+    require("nvim-tree").setup(opts)
+  end
+}
 

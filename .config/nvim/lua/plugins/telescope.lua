@@ -1,19 +1,31 @@
-local telescope = require('telescope')
-
-local actions = require('telescope.actions')
-
-telescope.setup({
-  defaults = {
-    mappings = {
-      i = {
-        ["<S-Tab>"] = actions.move_selection_previous,
-        ["<Tab>"] = actions.move_selection_next,
-      }
+-- Fuzzy finder
+return {
+  'nvim-telescope/telescope.nvim',
+  event = 'VeryLazy',
+  branch = '0.1.x',
+  dependencies = {
+    'nvim-lua/plenary.nvim',
+    {
+      'nvim-telescope/telescope-fzf-native.nvim',
+      build = 'make',
+      cond = function()
+        return vim.fn.executable 'make' == 1
+      end,
     },
-    layout_config = {
-      vertical = {
-        width = 0.75
+  },
+  opts = {
+    defaults = {
+      mappings = {
+        i = {
+          ["<S-Tab>"] = require('telescope.actions').move_selection_previous,
+          ["<Tab>"] = require('telescope.actions').move_selection_next,
+        }
+      },
+      layout_config = {
+        vertical = {
+          width = 0.75
+        }
       }
     }
   }
-})
+}

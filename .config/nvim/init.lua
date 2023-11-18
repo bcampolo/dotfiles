@@ -1,20 +1,22 @@
-require("plugins")
+-- Bootstrap lazy
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+-- This has to be set before initializing lazy
+vim.g.mapleader = " "
+require("lazy").setup("plugins")
+
+-- These modules are not loaded by lazy
 require("core.options")
 require("core.keymaps")
 require("core.colorscheme")
-require("plugins.autopairs")
-require("plugins.chatgpt")
-require("plugins.git-blame")
-require("plugins.harpoon")
-require("plugins.lualine")
-require("plugins.nvim-tree")
-require("plugins.telescope")
-require("plugins.treesitter")
-require("plugins.nvim-cmp")
-require("plugins.nvim-dap")
--- require("plugins.nvim-lint")
-require("plugins.vim-rest-console")
-
--- LSP plugins
-require("plugins.lsp.mason")
-require("plugins.lsp.lspzero")

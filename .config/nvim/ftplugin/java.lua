@@ -28,7 +28,8 @@ local config = {
     '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
 
     -- Eclipse jdtls location
-    '-jar', '/home/bcampolo/.local/share/nvim/mason/share/jdtls/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar',
+    -- '-jar', '/home/bcampolo/.local/share/nvim/mason/share/jdtls/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar',
+    '-jar', '/home/bcampolo/.local/share/nvim/mason/share/jdtls/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar',
     '-configuration', '/home/bcampolo/.local/share/nvim/mason/packages/jdtls/config_linux',
     '-data', workspace_dir
   },
@@ -74,6 +75,7 @@ local config = {
       references = {
         includeDecompiledSources = true,
       },
+      signatureHelp = { enabled = true },
       format = {
         enabled = true,
         settings = {
@@ -82,7 +84,6 @@ local config = {
         },
       },
     },
-    signatureHelp = { enabled = true },
     completion = {
       favoriteStaticMembers = {
         "org.hamcrest.MatcherAssert.assertThat",
@@ -126,17 +127,9 @@ local config = {
 config['on_attach'] = function(client, bufnr)
   jdtls.setup_dap({ hotcodereplace = 'auto' })
   require('jdtls.dap').setup_dap_main_class_configs()
-  require'keymaps'.map_java_keys(bufnr);
-  require "lsp_signature".on_attach({
-    bind = true, -- This is mandatory, otherwise border config won't get registered.
-    floating_window_above_cur_line = false,
-    padding = '',
-    handler_opts = {
-      border = "rounded"
-    }
-  }, bufnr)
 end
 
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.
 jdtls.start_or_attach(config)
+

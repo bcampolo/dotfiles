@@ -1,7 +1,5 @@
 SSE_SERVER_ID = 0
 JOB_ID = 0
-local P = {}
-keymaps = P
 
 -- Set leader key to space
 vim.g.mapleader = " "
@@ -49,30 +47,27 @@ keymap.set("n", "<leader>er", ":NvimTreeFocus<CR>") -- toggle focus to file expl
 keymap.set("n", "<leader>ef", ":NvimTreeFindFile<CR>") -- find file in file explorer
 
 -- telescope
-local builtin = require('telescope.builtin')
-keymap.set('n', '<leader>ff', builtin.find_files, {})
-keymap.set('n', '<leader>fg', builtin.live_grep, {})
-keymap.set('n', '<leader>fb', builtin.buffers, {})
-keymap.set('n', '<leader>fh', builtin.help_tags, {})
-keymap.set('n', '<leader>fs', builtin.current_buffer_fuzzy_find, {})
-keymap.set('n', '<leader>fo', builtin.lsp_document_symbols, {})
-keymap.set('n', '<leader>fi', builtin.lsp_incoming_calls, {})
-keymap.set('n', '<leader>fm', function() builtin.treesitter({default_text=":method:"}) end)
+keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, {})
+keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, {})
+keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, {})
+keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, {})
+keymap.set('n', '<leader>fs', require('telescope.builtin').current_buffer_fuzzy_find, {})
+keymap.set('n', '<leader>fo', require('telescope.builtin').lsp_document_symbols, {})
+keymap.set('n', '<leader>fi', require('telescope.builtin').lsp_incoming_calls, {})
+keymap.set('n', '<leader>fm', function() require('telescope.builtin').treesitter({default_text=":method:"}) end)
 
 -- harpoon
-local mark = require("harpoon.mark")
-local ui = require("harpoon.ui")
-keymap.set("n", "<leader>ha", mark.add_file)
-keymap.set("n", "<leader>hh", ui.toggle_quick_menu)
-keymap.set("n", "<leader>h1", function() ui.nav_file(1) end)
-keymap.set("n", "<leader>h2", function() ui.nav_file(2) end)
-keymap.set("n", "<leader>h3", function() ui.nav_file(3) end)
-keymap.set("n", "<leader>h4", function() ui.nav_file(4) end)
-keymap.set("n", "<leader>h5", function() ui.nav_file(5) end)
-keymap.set("n", "<leader>h6", function() ui.nav_file(6) end)
-keymap.set("n", "<leader>h7", function() ui.nav_file(7) end)
-keymap.set("n", "<leader>h8", function() ui.nav_file(8) end)
-keymap.set("n", "<leader>h9", function() ui.nav_file(9) end)
+keymap.set("n", "<leader>ha", require("harpoon.mark").add_file)
+keymap.set("n", "<leader>hh", require("harpoon.ui").toggle_quick_menu)
+keymap.set("n", "<leader>h1", function() require("harpoon.ui").nav_file(1) end)
+keymap.set("n", "<leader>h2", function() require("harpoon.ui").nav_file(2) end)
+keymap.set("n", "<leader>h3", function() require("harpoon.ui").nav_file(3) end)
+keymap.set("n", "<leader>h4", function() require("harpoon.ui").nav_file(4) end)
+keymap.set("n", "<leader>h5", function() require("harpoon.ui").nav_file(5) end)
+keymap.set("n", "<leader>h6", function() require("harpoon.ui").nav_file(6) end)
+keymap.set("n", "<leader>h7", function() require("harpoon.ui").nav_file(7) end)
+keymap.set("n", "<leader>h8", function() require("harpoon.ui").nav_file(8) end)
+keymap.set("n", "<leader>h9", function() require("harpoon.ui").nav_file(9) end)
 
 -- Vim REST Console
 keymap.set("n", "<leader>xr", ":call VrcQuery()<CR>") -- Run REST query
@@ -210,15 +205,15 @@ keymap.set("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>")
 keymap.set("n", "<leader>dj", "<cmd>lua require'dap'.step_over()<cr>")
 keymap.set("n", "<leader>dk", "<cmd>lua require'dap'.step_into()<cr>")
 keymap.set("n", "<leader>do", "<cmd>lua require'dap'.step_out()<cr>")
-keymap.set("n", '<leader>dd', "<cmd>lua require'dap'.disconnect()<cr>")
-keymap.set("n", '<leader>dt', "<cmd>lua require'dap'.terminate()<cr>")
+keymap.set("n", '<leader>dd', function() require('dap').disconnect(); require('dapui').close(); end)
+keymap.set("n", '<leader>dt', function() require('dap').terminate(); require('dapui').close(); end)
 keymap.set("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>")
 keymap.set("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>")
 keymap.set("n", '<leader>di', function() require "dap.ui.widgets".hover() end)
 keymap.set("n", '<leader>d?', function() local widgets = require "dap.ui.widgets"; widgets.centered_float(widgets.scopes) end)
 keymap.set("n", '<leader>df', '<cmd>Telescope dap frames<cr>')
 keymap.set("n", '<leader>dh', '<cmd>Telescope dap commands<cr>')
-keymap.set("n", '<leader>de', function() builtin.diagnostics({default_text=":E:"}) end)
+keymap.set("n", '<leader>de', function() require('telescope.builtin').diagnostics({default_text=":E:"}) end)
 
 -- git-blame
 keymap.set("n", "<leader>gb", ":GitBlameToggle<CR>") -- toggle maximize tab
@@ -328,6 +323,7 @@ keymap.set("n", "<leader>xh", function()
   })
 end)
 
+
 function dump(o)
    if type(o) == 'table' then
       local s = '{ '
@@ -339,11 +335,5 @@ function dump(o)
    else
       return tostring(o)
    end
-end
-
--- Java LSP - jdtls
-function P.map_java_keys(bufnr)
-  map_lsp_keys()
-  -- keymap.set("n", "<leader>ew", ":lua require('jdtls').organize_imports()<CR>")
 end
 
