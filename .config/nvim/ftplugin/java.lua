@@ -5,6 +5,7 @@ vim.opt.wrap = false
 local jdtls = require('jdtls')
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 local workspace_dir = '/home/bcampolo/jdtls-workspace/' .. project_name
+-- Needed for debugging
 local bundles = {
   vim.fn.glob('/home/bcampolo/.local/share/nvim/mason/share/java-debug-adapter/com.microsoft.java.debug.plugin.jar'),
 }

@@ -52,3 +52,6 @@ ItemPackagingFlag
 ItemPaymentAdjustmentFlag
 ItemPaymentApc
 ItemPaymentMethodFlag
+dropdown
+UI
+metadata

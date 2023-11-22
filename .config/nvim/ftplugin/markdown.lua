@@ -1,6 +1,7 @@
 -- Wrap text and indent properly
 vim.opt.wrap = true
 vim.opt.breakindent = true
+vim.opt.linebreak = true
 
 -- Allow j/k when navigating wrapped lines
 vim.keymap.set("n", "j", "gj")

@@ -22,8 +22,8 @@ keymap.set("n", "<leader>se", "<C-w>=") -- make split windows equal width
 keymap.set("n", "<leader>sx", ":close<CR>") -- close split window
 keymap.set("n", "<leader>sj", "<C-w>-") -- make split window height shorter
 keymap.set("n", "<leader>sk", "<C-w>+") -- make split windows height taller
-keymap.set("n", "<leader>sl", "<C-w>>") -- make split windows width bigger 
-keymap.set("n", "<leader>sh", "<C-w><") -- make split windows width smaller
+keymap.set("n", "<leader>sl", "<C-w>>5") -- make split windows width bigger 
+keymap.set("n", "<leader>sh", "<C-w><5") -- make split windows width smaller
 
 -- tab management
 keymap.set("n", "<leader>to", ":tabnew<CR>") -- open a new tab
@@ -37,6 +37,10 @@ keymap.set("n", "<leader>cj", ":diffget 1<CR>") -- get diff from left (local) du
 keymap.set("n", "<leader>ck", ":diffget 3<CR>") -- get diff from right (remote) during merge
 keymap.set("n", "<leader>cn", "]c") -- next diff hunk
 keymap.set("n", "<leader>cp", "[c") -- previous diff hunk
+
+-- quickfix keymaps
+keymap.set("n", "<leader>qn", ":cnext<CR>") -- jump to next quickfix list item
+keymap.set("n", "<leader>qp", ":cprev<CR>") -- jump to prev quickfix list item
 
 -- vim-maximizer
 keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>") -- toggle maximize tab
@@ -55,6 +59,9 @@ keymap.set('n', '<leader>fs', require('telescope.builtin').current_buffer_fuzzy_
 keymap.set('n', '<leader>fo', require('telescope.builtin').lsp_document_symbols, {})
 keymap.set('n', '<leader>fi', require('telescope.builtin').lsp_incoming_calls, {})
 keymap.set('n', '<leader>fm', function() require('telescope.builtin').treesitter({default_text=":method:"}) end)
+
+-- git-blame
+keymap.set("n", "<leader>gb", ":GitBlameToggle<CR>") -- toggle git blame
 
 -- harpoon
 keymap.set("n", "<leader>ha", require("harpoon.mark").add_file)
@@ -126,6 +133,7 @@ keymap.set("n", "<leader>xp", function()
   -- kill existing process
   -- vim.fn.jobstop(MOCK_PROC_ID)
   -- build jar using gradle
+    -- "-authorized_site_name", "3MTest",
   MOCK_PROC_ID = vim.fn.jobstart({
     "java",
     "-cp",
@@ -133,7 +141,7 @@ keymap.set("n", "<leader>xp", function()
     "-Xmx1g",
     "com.mmmhis.gpcs.mock.GpcsTestClient",
     "-sts_address", "https://gpcs.soa-pr.aws.3mhis.net/GpcsSts/oauth/token",
-    "-clientkey", "/home/a0msfzz/Downloads/2870159_3MHealthInformationSystems_Cert-PR.jks",
+    "-clientkey", "/home/a0msfzz/Downloads/2870159_3MHealthInformationSystems_SuperCert-PR.jks",
     "-ignore_certificate_errors", "true",
     "-request_timeout", "60000",
     "-rest_token_type", "jwt",
