@@ -1,4 +1,4 @@
--- Debugging
+-- Debugging Support
 return {
   "rcarriga/nvim-dap-ui",
   event = 'VeryLazy',
@@ -6,7 +6,7 @@ return {
     "mfussenegger/nvim-dap",
     "theHamsta/nvim-dap-virtual-text", -- inline variable text while debugging
     "nvim-telescope/telescope-dap.nvim", -- telescope integration with dap
-    "mfussenegger/nvim-jdtls",
+    "mfussenegger/nvim-jdtls", -- Java LSP support
   },
   opts = {
     controls = {

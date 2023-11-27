@@ -1,18 +1,18 @@
--- LSP
+-- LSP Support
 return {
   -- LSP Configuration
   'neovim/nvim-lspconfig',
   event = 'VeryLazy',
   dependencies = {
     -- LSP Manager Plugins
-    'williamboman/mason.nvim',
-    'williamboman/mason-lspconfig.nvim',
+    { 'williamboman/mason.nvim' },
+    { 'williamboman/mason-lspconfig.nvim' },
 
     -- Useful status updates for LSP
     { 'j-hui/fidget.nvim', opts = {} },
 
     -- Additional lua configuration, makes nvim stuff amazing!
-    'folke/neodev.nvim',
+    {'folke/neodev.nvim' },
   },
   config = function ()
     require('mason').setup()
@@ -42,10 +42,10 @@ return {
       -- Create your keybindings here...
     end
 
-    -- Setup each LSP server
+    -- Call setup on each LSP server
     require('mason-lspconfig').setup_handlers({
       function(server_name)
-        -- Don't setup JDTLS Java LSP because it will be setup from a separte config
+        -- Don't call setup for JDTLS Java LSP because it will be setup from a separte config
         if server_name ~= 'jdtls' then
           lspconfig[server_name].setup({
             on_attach = lsp_attach,
@@ -55,7 +55,7 @@ return {
       end
     })
 
-    -- Lua LSP
+    -- Lua LSP settings
     lspconfig.lua_ls.setup {
       settings = {
         Lua = {

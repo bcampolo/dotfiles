@@ -1,9 +1,7 @@
-local opt = vim.opt
+-- Line wrapping
+vim.opt.wrap = false
+vim.opt.relativenumber = false
 
--- line wrapping
-opt.wrap = false
-opt.relativenumber = false
-
-opt.synmaxcol = 250
+vim.opt.synmaxcol = 250
 
 

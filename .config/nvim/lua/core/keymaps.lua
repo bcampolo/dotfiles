@@ -6,7 +6,7 @@ vim.g.mapleader = " "
 
 local keymap = vim.keymap
 
--- general keymaps
+-- General keymaps
 keymap.set("i", "jk", "<ESC>") -- exit insert mode with jk 
 keymap.set("i", "ii", "<ESC>") -- exit insert mode with ii
 keymap.set("i", "II", "<ESC><CapsLock>") -- exit insert mode with ii
@@ -14,7 +14,7 @@ keymap.set("n", "<leader>wq", ":wq<CR>") -- save and quit
 keymap.set("n", "<leader>qq", ":q!<CR>") -- quit without saving
 keymap.set("n", "<leader>ww", ":w<CR>") -- save
 
--- split window management
+-- Split window management
 keymap.set("n", "<leader>nh", "nohl<CR>")
 keymap.set("n", "<leader>sv", "<C-w>v") -- split window vertically
 keymap.set("n", "<leader>sh", "<C-w>s") -- split window horizontally
@@ -25,32 +25,32 @@ keymap.set("n", "<leader>sk", "<C-w>+") -- make split windows height taller
 keymap.set("n", "<leader>sl", "<C-w>>5") -- make split windows width bigger 
 keymap.set("n", "<leader>sh", "<C-w><5") -- make split windows width smaller
 
--- tab management
+-- Tab management
 keymap.set("n", "<leader>to", ":tabnew<CR>") -- open a new tab
 keymap.set("n", "<leader>tx", ":tabclose<CR>") -- close a tab
 keymap.set("n", "<leader>tn", ":tabn<CR>") -- next tab
 keymap.set("n", "<leader>tp", ":tabp<CR>") -- previous tab
 
--- diff keymaps
+-- Diff keymaps
 keymap.set("n", "<leader>cc", ":diffput<CR>") -- put diff from current to other during diff
 keymap.set("n", "<leader>cj", ":diffget 1<CR>") -- get diff from left (local) during merge
 keymap.set("n", "<leader>ck", ":diffget 3<CR>") -- get diff from right (remote) during merge
 keymap.set("n", "<leader>cn", "]c") -- next diff hunk
 keymap.set("n", "<leader>cp", "[c") -- previous diff hunk
 
--- quickfix keymaps
+-- Quickfix keymaps
 keymap.set("n", "<leader>qn", ":cnext<CR>") -- jump to next quickfix list item
 keymap.set("n", "<leader>qp", ":cprev<CR>") -- jump to prev quickfix list item
 
--- vim-maximizer
+-- Vim-maximizer
 keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>") -- toggle maximize tab
 
--- nvim-tree
+-- Nvim-tree
 keymap.set("n", "<leader>ee", ":NvimTreeToggle<CR>") -- toggle file explorer
 keymap.set("n", "<leader>er", ":NvimTreeFocus<CR>") -- toggle focus to file explorer
 keymap.set("n", "<leader>ef", ":NvimTreeFindFile<CR>") -- find file in file explorer
 
--- telescope
+-- Telescope
 keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, {})
 keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, {})
 keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, {})
@@ -60,10 +60,10 @@ keymap.set('n', '<leader>fo', require('telescope.builtin').lsp_document_symbols,
 keymap.set('n', '<leader>fi', require('telescope.builtin').lsp_incoming_calls, {})
 keymap.set('n', '<leader>fm', function() require('telescope.builtin').treesitter({default_text=":method:"}) end)
 
--- git-blame
+-- Git-blame
 keymap.set("n", "<leader>gb", ":GitBlameToggle<CR>") -- toggle git blame
 
--- harpoon
+-- Harpoon
 keymap.set("n", "<leader>ha", require("harpoon.mark").add_file)
 keymap.set("n", "<leader>hh", require("harpoon.ui").toggle_quick_menu)
 keymap.set("n", "<leader>h1", function() require("harpoon.ui").nav_file(1) end)
@@ -79,7 +79,7 @@ keymap.set("n", "<leader>h9", function() require("harpoon.ui").nav_file(9) end)
 -- Vim REST Console
 keymap.set("n", "<leader>xr", ":call VrcQuery()<CR>") -- Run REST query
 
--- get token
+-- Get token
 keymap.set("n", "<leader>xt", function()
   -- kill existing process
   -- vim.fn.jobstop(MOCK_PROC_ID)
@@ -128,7 +128,7 @@ keymap.set("n", "<leader>xt", function()
   })
 end)
 
--- get production token
+-- Get production token
 keymap.set("n", "<leader>xp", function()
   -- kill existing process
   -- vim.fn.jobstop(MOCK_PROC_ID)
@@ -179,7 +179,7 @@ keymap.set("n", "<leader>xp", function()
 end)
 
 
--- lsp/jdtls
+-- LSP/JDTLS
 keymap.set('n', '<leader>go', "<cmd>lua require('jdtls').organize_imports()<CR>")
 keymap.set('n', '<leader>gu', "<cmd>lua require('jdtls').update_projects_config()<CR>")
 keymap.set('n', '<leader>gg', '<cmd>lua vim.lsp.buf.hover()<CR>')
@@ -199,11 +199,11 @@ keymap.set('n', '<leader>gn', '<cmd>lua vim.diagnostic.goto_next()<CR>')
 keymap.set('n', '<leader>tr', '<cmd>lua vim.lsp.buf.document_symbol()<CR>')
 keymap.set('i', '<C-Space>', '<cmd>lua vim.lsp.buf.completion()<CR>')
 
--- testing
+-- Testing
 keymap.set("n", "<leader>tc", "<cmd>lua require('jdtls').test_class()<CR>")
 keymap.set("n", "<leader>tm", "<cmd>lua require('jdtls').test_nearest_method()<CR>")
 
--- nvim-dap
+-- Nvim-dap
 keymap.set("n", "<leader>bb", "<cmd>lua require'dap'.toggle_breakpoint()<cr>")
 keymap.set("n", "<leader>bc", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>")
 keymap.set("n", "<leader>bl", "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>")
@@ -222,9 +222,6 @@ keymap.set("n", '<leader>d?', function() local widgets = require "dap.ui.widgets
 keymap.set("n", '<leader>df', '<cmd>Telescope dap frames<cr>')
 keymap.set("n", '<leader>dh', '<cmd>Telescope dap commands<cr>')
 keymap.set("n", '<leader>de', function() require('telescope.builtin').diagnostics({default_text=":E:"}) end)
-
--- git-blame
-keymap.set("n", "<leader>gb", ":GitBlameToggle<CR>") -- toggle maximize tab
 
 -- Starship Empire
 -- client

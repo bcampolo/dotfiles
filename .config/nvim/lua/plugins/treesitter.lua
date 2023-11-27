@@ -1,4 +1,4 @@
--- Code tree support and syntax hilighting
+-- Code Tree Support / Syntax Highlighting
 return {
   'nvim-treesitter/nvim-treesitter',
   event = 'VeryLazy',

@@ -1,4 +1,4 @@
--- line wrapping
+-- Line Wrapping
 vim.opt.wrap = false
 
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.

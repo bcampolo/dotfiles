@@ -1,4 +1,4 @@
--- List of favorite files per project
+-- List of favorite files/marks per project
 return {
   'ThePrimeagen/harpoon',
   event = 'VeryLazy',
@@ -7,7 +7,6 @@ return {
   },
   opts = {
     menu = {
-      -- width = vim.api.nvim_win_get_width(0) - 20
       width = 120
     }
   },

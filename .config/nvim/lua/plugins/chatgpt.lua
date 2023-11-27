@@ -24,8 +24,8 @@ return {
     chat = {
       welcome_message = [[ Welcome ]],
       loading_text = "LOADING...",
-      question_sign = "", -- �  
-      answer_sign = "ﮧ", -- �  
+      question_sign = "", -- 🙂 
+      answer_sign = "ﮧ", -- 🤖 
       max_line_length = 120,
       sessions_window = {
         border = {
@@ -120,7 +120,7 @@ return {
       },
       submit = "<C-Enter>",
       submit_n = "<Enter>",
-      max_visible_lines = 20,
+      max_visible_lines = 18,
     },
     settings_window = {
       border = {
@@ -137,7 +137,7 @@ return {
       model = "gpt-3.5-turbo",
       frequency_penalty = 0,
       presence_penalty = 0,
-      max_tokens = 300,
+      max_tokens = 1000,
       temperature = 0,
       top_p = 1,
       n = 1,

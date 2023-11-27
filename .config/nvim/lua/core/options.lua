@@ -1,52 +1,52 @@
 local opt = vim.opt
 
--- session management
+-- Session Management
 opt.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
--- line numbers
+-- Line Numbers
 opt.relativenumber = true
 opt.number = true
 
--- tabs & indentation
+-- Tabs & Indentation
 opt.tabstop = 2
 opt.shiftwidth = 2
 opt.expandtab = true
 opt.autoindent = true
 vim.bo.softtabstop = 2
 
--- line wrapping
+-- Line Wrapping
 opt.wrap = false
 
--- search settings
+-- Search Settings
 opt.ignorecase = true
 opt.smartcase = true
 
--- cursor line
+-- Cursor Line
 opt.cursorline = true
 
--- appearance
+-- Appearance
 opt.termguicolors = true
 opt.background = "dark"
 opt.signcolumn = "yes"
 
--- backspace
+-- Backspace
 opt.backspace = "indent,eol,start"
 
---clipboard
+-- Clipboard
 opt.clipboard:append("unnamedplus")
 
--- split windows
+-- Split Windows
 opt.splitright = true
 opt.splitbelow = true
 
--- consider - as part of keyword
+-- Consider - as part of keyword
 opt.iskeyword:append("-")
 
--- disable the mouse while in nvim
+-- Disable the mouse while in nvim
 opt.mouse = ""
 
--- folding
+-- Folding
 opt.foldlevel = 20
 opt.foldmethod = "expr"
-opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldexpr = "nvim_treesitter#foldexpr()" -- Utilize Treesitter folds
 
