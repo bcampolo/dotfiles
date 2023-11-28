@@ -3,8 +3,15 @@ return {
   'rebelot/kanagawa.nvim',
   lazy = false,
   priority = 1000,
-  config = function()
-    vim.cmd([[colorscheme kanagawa]])
+  opts = {
+    -- Replace this section with your colorscheme-specific settings or just remove for the defaults
+    -- background = {
+    --   dark = "wave",
+    -- },
+  },
+  config = function(_, opts)
+    require('kanagawa').setup(opts)
+    vim.cmd("colorscheme kanagawa")
     -- Colorscheme overrides
     vim.cmd([[
       autocmd VimEnter * hi DiffAdd guifg=#00FF00 guibg=#005500
