@@ -12,7 +12,6 @@ return {
       disable = { "r" }, -- list of language name (not extension) that will be disabled
     },
     indent = { enable = true },
-    autotag = { enable = true };
     ensure_installed = {
       "bash",
       "cpp",
@@ -29,6 +28,7 @@ return {
       "typescript",
       "rust",
       "vim",
+      "xml",
       "yaml",
     },
     auto_install = true,
