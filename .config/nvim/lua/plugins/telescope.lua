@@ -1,7 +1,7 @@
 -- Fuzzy finder
 return {
   'nvim-telescope/telescope.nvim',
-  event = 'VeryLazy',
+  lazy = true,
   branch = '0.1.x',
   dependencies = {
     { 'nvim-lua/plenary.nvim' },
@@ -15,12 +15,6 @@ return {
   },
   opts = {
     defaults = {
-      mappings = {
-        i = {
-          ["<S-Tab>"] = require('telescope.actions').move_selection_previous,
-          ["<Tab>"] = require('telescope.actions').move_selection_next,
-        }
-      },
       layout_config = {
         vertical = {
           width = 0.75

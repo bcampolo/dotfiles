@@ -1,17 +1,17 @@
 -- Theme/Colorscheme
 return {
-  'rebelot/kanagawa.nvim',
-  lazy = false,
-  priority = 1000,
+  'rebelot/kanagawa.nvim', -- You can replace this with your favorite colorscheme
+  lazy = false, -- We want the colorscheme to load immediately when starting Neovim
+  priority = 1000, -- Load the colorscheme before other non-lazy-loaded plugins
   opts = {
-    -- Replace this section with your colorscheme-specific settings or just remove for the defaults
+    -- Replace this with your scheme-specific settings or remove to use the defaults
     -- background = {
     --   dark = "wave",
     -- },
   },
   config = function(_, opts)
-    require('kanagawa').setup(opts)
-    vim.cmd("colorscheme kanagawa")
+    require('kanagawa').setup(opts) -- Replace this with your favorite colorscheme
+    vim.cmd("colorscheme kanagawa") -- Replace this with your favorite colorscheme
     -- Colorscheme overrides
     vim.cmd([[
       autocmd VimEnter * hi DiffAdd guifg=#00FF00 guibg=#005500

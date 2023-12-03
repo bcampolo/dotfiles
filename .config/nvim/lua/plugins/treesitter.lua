@@ -12,26 +12,10 @@ return {
       disable = { "r" }, -- list of language name (not extension) that will be disabled
     },
     indent = { enable = true },
-    ensure_installed = {
-      "bash",
-      "cpp",
-      "css",
-      "dockerfile",
-      "java",
-      "javascript",
-      "json",
-      "gitignore",
-      "html",
-      "lua",
-      "markdown",
-      "tsx",
-      "typescript",
-      "rust",
-      "vim",
-      "xml",
-      "yaml",
-    },
-    auto_install = true,
-  }
+    auto_install = true, -- automatically install syntax support when entering new file type buffer
+  },
+  config = function (_, opts)
+    local configs = require("nvim-treesitter.configs")
+    configs.setup(opts)
+  end
 }
-
