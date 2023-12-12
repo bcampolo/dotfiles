@@ -40,6 +40,7 @@ keymap.set("n", "<leader>cp", "[c") -- previous diff hunk
 -- Quickfix keymaps
 keymap.set("n", "<leader>qn", ":cnext<CR>") -- jump to next quickfix list item
 keymap.set("n", "<leader>qp", ":cprev<CR>") -- jump to prev quickfix list item
+keymap.set("n", "<leader>qc", ":cclose<CR>") -- jump to prev quickfix list item
 
 -- Vim-maximizer
 keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>") -- toggle maximize tab
@@ -326,7 +327,6 @@ keymap.set("n", "<leader>xh", function()
     end
   })
 end)
-
 
 function dump(o)
    if type(o) == 'table' then
