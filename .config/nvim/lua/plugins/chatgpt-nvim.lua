@@ -1,11 +1,15 @@
 -- ChatGPT
 return {
-  "jackMort/ChatGPT.nvim",
+  -- https://github.com/jackMort/ChatGPT.nvim
+  'jackMort/ChatGPT.nvim',
   event = "VeryLazy",
   dependencies = {
-    "MunifTanjim/nui.nvim",
-    "nvim-lua/plenary.nvim",
-    "nvim-telescope/telescope.nvim"
+    -- https://github.com/MunifTanjim/nui.nvim
+    'MunifTanjim/nui.nvim',
+    -- https://github.com/nvim-lua/plenary.nvim
+    'nvim-lua/plenary.nvim',
+    -- https://github.com/nvim-telescope/telescope.nvim
+    'nvim-telescope/telescope.nvim'
   },
   opts = {
     api_key_cmd = 'secret-tool lookup openai neovim',
