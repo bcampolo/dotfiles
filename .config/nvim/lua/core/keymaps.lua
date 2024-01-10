@@ -90,7 +90,7 @@ keymap.set("n", "<leader>xt", function()
     "/home/a0msfzz/git/gpcs-gpcs-104/gpcs/mock/build/libs/gpcsTestClient.jar",
     "-Xmx1g",
     "com.mmmhis.gpcs.mock.GpcsTestClient",
-    "-sts_address", "https://gpcs.soa-rd.aws.3mhis.net/GpcsSts/oauth/token",
+    "-sts_address", "https://gpcs-usrd.ugdnpnp-1.us.amz.3mhis.net/GpcsSts/oauth/token",
     "-clientkey", "/home/a0msfzz/Downloads/2870159_3MHealthInformationSystems_Cert.jks",
     "-ignore_certificate_errors", "true",
     "-request_timeout", "60000",
