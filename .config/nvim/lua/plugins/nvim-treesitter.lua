@@ -25,3 +25,4 @@ return {
     configs.setup(opts)
   end
 }
+

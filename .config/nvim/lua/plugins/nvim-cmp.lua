@@ -28,7 +28,7 @@ return {
     local cmp = require('cmp')
     local luasnip = require('luasnip')
     require('luasnip.loaders.from_vscode').lazy_load()
-    luasnip.config.setup {}
+    luasnip.config.setup({})
 
     cmp.setup({
       snippet = {
@@ -36,16 +36,20 @@ return {
           luasnip.lsp_expand(args.body)
         end,
       },
+      completion = {
+        completeopt = 'menu,menuone,noinsert',
+      },
       mapping = cmp.mapping.preset.insert {
-        ['<C-n>'] = cmp.mapping.select_next_item(),
-        ['<C-p>'] = cmp.mapping.select_prev_item(),
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete {},
+        ['<C-j>'] = cmp.mapping.select_next_item(), -- next suggestion
+        ['<C-k>'] = cmp.mapping.select_prev_item(), -- previous suggestion
+        ['<C-b>'] = cmp.mapping.scroll_docs(-4), -- scroll backward
+        ['<C-f>'] = cmp.mapping.scroll_docs(4), -- scroll forward
+        ['<C-Space>'] = cmp.mapping.complete {}, -- show completion suggestions
         ['<CR>'] = cmp.mapping.confirm {
           behavior = cmp.ConfirmBehavior.Replace,
           select = true,
         },
+	-- Tab through suggestions or when a snippet is active, tab to the next argument
         ['<Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
@@ -55,6 +59,7 @@ return {
             fallback()
           end
         end, { 'i', 's' }),
+	-- Tab backwards through suggestions or when a snippet is active, tab to the next argument
         ['<S-Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()

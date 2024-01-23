@@ -38,9 +38,12 @@ keymap.set("n", "<leader>cn", "]c") -- next diff hunk
 keymap.set("n", "<leader>cp", "[c") -- previous diff hunk
 
 -- Quickfix keymaps
+keymap.set("n", "<leader>qo", ":copen<CR>") -- open quickfix list
+keymap.set("n", "<leader>qf", ":cfirst<CR>") -- jump to first quickfix list item
 keymap.set("n", "<leader>qn", ":cnext<CR>") -- jump to next quickfix list item
 keymap.set("n", "<leader>qp", ":cprev<CR>") -- jump to prev quickfix list item
-keymap.set("n", "<leader>qc", ":cclose<CR>") -- jump to prev quickfix list item
+keymap.set("n", "<leader>ql", ":clast<CR>") -- jump to last quickfix list item
+keymap.set("n", "<leader>qc", ":cclose<CR>") -- close quickfix list
 
 -- Vim-maximizer
 keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>") -- toggle maximize tab
@@ -179,9 +182,7 @@ keymap.set("n", "<leader>xp", function()
 end)
 
 
--- LSP/JDTLS
-keymap.set('n', '<leader>go', "<cmd>lua require('jdtls').organize_imports()<CR>")
-keymap.set('n', '<leader>gu', "<cmd>lua require('jdtls').update_projects_config()<CR>")
+-- LSP
 keymap.set('n', '<leader>gg', '<cmd>lua vim.lsp.buf.hover()<CR>')
 keymap.set('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
 keymap.set('n', '<leader>gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
@@ -199,11 +200,38 @@ keymap.set('n', '<leader>gn', '<cmd>lua vim.diagnostic.goto_next()<CR>')
 keymap.set('n', '<leader>tr', '<cmd>lua vim.lsp.buf.document_symbol()<CR>')
 keymap.set('i', '<C-Space>', '<cmd>lua vim.lsp.buf.completion()<CR>')
 
--- Testing
-keymap.set("n", "<leader>tc", "<cmd>lua require('jdtls').test_class()<CR>")
-keymap.set("n", "<leader>tm", "<cmd>lua require('jdtls').test_nearest_method()<CR>")
+-- Filetype-specific keymaps (these can be done in the ftplugin directory instead if you prefer)
+keymap.set("n", '<leader>go', function()
+  if vim.bo.filetype == 'java' then
+    require('jdtls').organize_imports();
+  elseif vim.bo.filetype == 'python' then
+    vim.api.nvim_command('PyrightOrganizeImports')
+  end
+end)
 
--- Nvim-dap
+keymap.set("n", '<leader>gu', function()
+  if vim.bo.filetype == 'java' then
+    require('jdtls').update_projects_config();
+  end
+end)
+
+keymap.set("n", '<leader>tc', function()
+  if vim.bo.filetype == 'java' then
+    require('jdtls').test_class();
+  elseif vim.bo.filetype == 'python' then
+    require('dap-python').test_class();
+  end
+end)
+
+keymap.set("n", '<leader>tm', function()
+  if vim.bo.filetype == 'java' then
+    require('jdtls').test_nearest_method();
+  elseif vim.bo.filetype == 'python' then
+    require('dap-python').test_method();
+  end
+end)
+
+-- Debugging
 keymap.set("n", "<leader>bb", "<cmd>lua require'dap'.toggle_breakpoint()<cr>")
 keymap.set("n", "<leader>bc", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>")
 keymap.set("n", "<leader>bl", "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>")
@@ -327,6 +355,7 @@ keymap.set("n", "<leader>xh", function()
     end
   })
 end)
+
 
 function dump(o)
    if type(o) == 'table' then
