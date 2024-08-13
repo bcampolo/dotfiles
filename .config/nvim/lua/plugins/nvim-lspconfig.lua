@@ -21,7 +21,7 @@ return {
 
     -- Additional lua configuration, makes nvim stuff amazing!
     -- https://github.com/folke/neodev.nvim
-    {'folke/neodev.nvim' },
+    { 'folke/neodev.nvim', opts = {} },
   },
   config = function ()
     require('mason').setup()
@@ -74,16 +74,11 @@ return {
     -- Call setup on each LSP server
     require('mason-lspconfig').setup_handlers({
       function(server_name)
-        -- Don't call setup for JDTLS Java LSP because it will be setup from a separte config
+        -- Don't call setup for JDTLS Java LSP because it will be setup from a separate config
         if server_name ~= 'jdtls' then
           lspconfig[server_name].setup({
             on_attach = lsp_attach,
             capabilities = lsp_capabilities,
-            handlers = {
-              -- Add borders to LSP popups
-              ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = 'rounded'}),
-              ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = 'rounded' }),
-            }
           })
         end
       end
@@ -100,6 +95,14 @@ return {
         },
       },
     }
+
+    -- Globally configure all LSP floating preview popups (like hover, signature help, etc)
+    local open_floating_preview = vim.lsp.util.open_floating_preview
+    function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+      opts = opts or {}
+      opts.border = opts.border or "rounded" -- Set border to rounded
+      return open_floating_preview(contents, syntax, opts, ...)
+    end
 
   end
 }

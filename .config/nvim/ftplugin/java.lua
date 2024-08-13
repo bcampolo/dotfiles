@@ -1,17 +1,17 @@
--- Line Wrapping
-vim.opt.wrap = false
-
--- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
+-- JDTLS (Java LSP) configuration
 local jdtls = require('jdtls')
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
-local workspace_dir = '/home/bcampolo/jdtls-workspace/' .. project_name
+local workspace_dir = vim.env.HOME .. '/jdtls-workspace/' .. project_name
+
 -- Needed for debugging
 local bundles = {
-  vim.fn.glob('/home/bcampolo/.local/share/nvim/mason/share/java-debug-adapter/com.microsoft.java.debug.plugin.jar'),
+  vim.fn.glob(vim.env.HOME .. '/.local/share/nvim/mason/share/java-debug-adapter/com.microsoft.java.debug.plugin.jar'),
 }
--- Needed for running/debugging unit tests
-vim.list_extend(bundles, vim.split(vim.fn.glob("/home/bcampolo/git/vscode-java-test/server/*.jar", 1), "\n"))
 
+-- Needed for running/debugging unit tests
+vim.list_extend(bundles, vim.split(vim.fn.glob(vim.env.HOME .. "/.local/share/nvim/mason/share/java-test/*.jar", 1), "\n"))
+
+-- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local config = {
   -- The command that starts the language server
   -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
@@ -22,16 +22,15 @@ local config = {
     '-Declipse.product=org.eclipse.jdt.ls.core.product',
     '-Dlog.protocol=true',
     '-Dlog.level=ALL',
-    '-javaagent:' .. '/home/bcampolo/.local/share/nvim/mason/share/jdtls/lombok.jar',
+    '-javaagent:' .. vim.env.HOME .. '/.local/share/nvim/mason/share/jdtls/lombok.jar',
     '-Xmx4g',
     '--add-modules=ALL-SYSTEM',
     '--add-opens', 'java.base/java.util=ALL-UNNAMED',
     '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
 
     -- Eclipse jdtls location
-    -- '-jar', '/home/bcampolo/.local/share/nvim/mason/share/jdtls/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar',
-    '-jar', '/home/bcampolo/.local/share/nvim/mason/share/jdtls/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar',
-    '-configuration', '/home/bcampolo/.local/share/nvim/mason/packages/jdtls/config_linux',
+    '-jar', vim.env.HOME .. '/.local/share/nvim/mason/share/jdtls/plugins/org.eclipse.equinox.launcher.jar',
+    '-configuration', vim.env.HOME .. '/.local/share/nvim/mason/packages/jdtls/config_linux',
     '-data', workspace_dir
   },
 
@@ -49,6 +48,7 @@ local config = {
       },
       configuration = {
         updateBuildConfiguration = "interactive",
+        -- The runtime name parameters need to match specific Java execution environments.  See https://github.com/tamago324/nlsp-settings.nvim/blob/2a52e793d4f293c0e1d61ee5794e3ff62bfbbb5d/schemas/_generated/jdtls.json#L317-L334
         runtimes = {
           {
             name = "JavaSE-11",
@@ -79,10 +79,11 @@ local config = {
       signatureHelp = { enabled = true },
       format = {
         enabled = true,
-        settings = {
-          url = vim.fn.stdpath "config" .. "/lang-servers/intellij-java-google-style.xml",
-          profile = "GoogleStyle",
-        },
+        -- Formatting works by default, but you can refer to a specific file/URL if you choose
+        -- settings = {
+        --   url = "https://github.com/google/styleguide/blob/gh-pages/intellij-java-google-style.xml",
+        --   profile = "GoogleStyle",
+        -- },
       },
     },
     completion = {
@@ -116,21 +117,23 @@ local config = {
       useBlocks = true,
     },
   },
-
+  -- Needed for auto-completion with method signatures and placeholders
+  capabilities = require('cmp_nvim_lsp').default_capabilities(),
   flags = {
     allow_incremental_sync = true,
   },
   init_options = {
+    -- References the bundles defined above to support Debugging and Unit Testing
     bundles = bundles
   },
 }
 
+-- Needed for debugging
 config['on_attach'] = function(client, bufnr)
   jdtls.setup_dap({ hotcodereplace = 'auto' })
   require('jdtls.dap').setup_dap_main_class_configs()
 end
 
--- This starts a new client & server,
--- or attaches to an existing client & server depending on the `root_dir`.
+-- This starts a new client & server, or attaches to an existing client & server based on the `root_dir`.
 jdtls.start_or_attach(config)
 

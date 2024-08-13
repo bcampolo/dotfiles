@@ -6,12 +6,12 @@ return {
   dependencies = {
     -- https://github.com/mfussenegger/nvim-dap
     'mfussenegger/nvim-dap',
+    -- https://github.com/nvim-neotest/nvim-nio
+    'nvim-neotest/nvim-nio',
     -- https://github.com/theHamsta/nvim-dap-virtual-text
     'theHamsta/nvim-dap-virtual-text', -- inline variable text while debugging
     -- https://github.com/nvim-telescope/telescope-dap.nvim
     'nvim-telescope/telescope-dap.nvim', -- telescope integration with dap
-    -- https://github.com/mfussenegger/nvim-jdtls
-    "mfussenegger/nvim-jdtls", -- Java LSP support
   },
   opts = {
     controls = {
@@ -105,6 +105,18 @@ return {
       -- Commented to prevent DAP UI from closing when unit tests finish
       -- require('dapui').close()
     end
+
+    -- Add dap configurations based on your language/adapter settings
+    -- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
+    dap.configurations.python = {
+      {
+        name = 'Debug justMyCode=false',
+        type = 'python',
+        request = 'launch',
+        program = '${file}',
+        justMyCode=false,
+      },
+    }
 
     dap.configurations.java = {
       {
