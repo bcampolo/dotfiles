@@ -11,7 +11,6 @@ return {
   opts = {
     highlight = {
       enable = true,
-      disable = { "r" }, -- list of language name (not extension) that will be disabled
     },
     indent = { enable = true },
     auto_install = true, -- automatically install syntax support when entering new file type buffer

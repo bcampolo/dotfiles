@@ -50,6 +50,8 @@ return {
     require('mason-tool-installer').setup({
       -- Install these linters, formatters, debuggers automatically
       ensure_installed = {
+        'java-debug-adapter',
+        'java-test',
         'black',
         'debugpy',
         'flake8',
