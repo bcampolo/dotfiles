@@ -119,6 +119,7 @@ alias cleanupbranches='git branch | grep -v "dev" | grep -v "master" | xargs git
 alias bkill='sh -c '\''kill -9 $(ps -ef | grep "$1" | grep -v grep | tr -s '\''\'\'''\'' '\''\'\'''\'' | cut -d '\''\'\'''\'' '\''\'\'''\'' -f 2 )'\'' _'
 alias bfar='sh -c '\''find ./ -type f -exec sed -i -e "s@$1@$2@g" {} \;'\'' _'
 alias bigfiles='sudo du -a / | sort -n -r | head -n 100'
+alias python='python3'
 ################################################
 
 ##### BJC UPDATES ##############################
@@ -168,6 +169,9 @@ prompt_command() {
 
 # Update prompt
 PROMPT_COMMAND=prompt_command
+
+# After each command save the history
+export PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
 ################################################
 
 # enable programmable completion features (you don't need to enable
@@ -194,3 +198,17 @@ if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] &&
   #exec tmux attach
   exec tmux # uncomment if the above line is failing to start terminal
 fi
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
+
+# PyEnv init
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
