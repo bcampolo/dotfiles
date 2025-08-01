@@ -59,7 +59,7 @@ keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, {}) -- fuz
 keymap.set('n', '<leader>fs', require('telescope.builtin').current_buffer_fuzzy_find, {}) -- fuzzy find in current file buffer
 keymap.set('n', '<leader>fo', require('telescope.builtin').lsp_document_symbols, {}) -- fuzzy find LSP/class symbols
 keymap.set('n', '<leader>fi', require('telescope.builtin').lsp_incoming_calls, {}) -- fuzzy find LSP/incoming calls
-keymap.set('n', '<leader>fm', function() require('telescope.builtin').treesitter({default_text=":method:"}) end) -- fuzzy find methods in current class
+keymap.set('n', '<leader>fm', function() require('telescope.builtin').treesitter({symbols={'function', 'method'}}) end) -- fuzzy find methods in current class
 keymap.set('n', '<leader>ft', function() -- grep file contents in current nvim-tree node
   local success, node = pcall(function() return require('nvim-tree.lib').get_node_at_cursor() end)
   if not success or not node then return end;

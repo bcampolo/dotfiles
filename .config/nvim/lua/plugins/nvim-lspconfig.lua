@@ -29,13 +29,11 @@ return {
       -- Install these LSPs automatically
       ensure_installed = {
         'bashls',
-        'clangd',
         'cssls',
         'html',
         'gradle_ls',
         'groovyls',
         'lua_ls',
-        'intelephense',
         'jdtls',
         'jsonls',
         'lemminx',
@@ -72,17 +70,15 @@ return {
     end
 
     -- Call setup on each LSP server
-    require('mason-lspconfig').setup_handlers({
-      function(server_name)
-        -- Don't call setup for JDTLS Java LSP because it will be setup from a separate config
-        if server_name ~= 'jdtls' then
-          lspconfig[server_name].setup({
-            on_attach = lsp_attach,
-            capabilities = lsp_capabilities,
-          })
-        end
+    for _, server_name in ipairs(require('mason-lspconfig').get_installed_servers()) do
+      -- Don't call setup for JDTLS Java LSP because it will be setup from a separate config
+      if server_name ~= 'jdtls' then
+        lspconfig[server_name].setup({
+          on_attach = lsp_attach,
+          capabilities = lsp_capabilities,
+        })
       end
-    })
+    end
 
     -- Lua LSP settings
     lspconfig.lua_ls.setup {

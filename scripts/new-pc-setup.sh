@@ -2,7 +2,7 @@
 
 BRANCH=$1
 
-cd ~/Downloads
+cd /tmp
 
 # Update apt repo
 sudo apt-get update -qq
@@ -35,10 +35,7 @@ nvm current
 
 # TMUX
 sudo apt-get install -yy \
-  tmux \
-  ripgrep \
-  fzf \
-  xclip
+  tmux
 cp -f ~/git/dotfiles/.tmux.conf ~/.tmux.conf
 
 # NEOVIM
@@ -48,6 +45,14 @@ mv ~/.config/nvim{,.bak}
 mv ~/.local/share/nvim{,.bak}
 mv ~/.local/state/nvim{,.bak}
 mv ~/.cache/nvim{,.bak}
+# Prerequisites
+sudo apt install -yy \
+  luarocks \
+  ripgrep \
+  fd-find \
+  fzf \
+  xclip
+wget -qO- https://astral.sh/uv/install.sh | sh # installs uvx - needed for MCP Hub
 # Install
 curl -LO https://github.com/neovim/neovim/releases/download/v0.11.3/nvim-linux-x86_64.tar.gz
 sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
@@ -62,16 +67,15 @@ cp -rf ~/git/dotfiles/rest-collection ~/
 # JAVA
 sudo apt-get install -yy \
   openjdk-17-jdk \
-  openjdk-22-jdk
+  openjdk-21-jdk
 
 # ANGULAR
-# FIXME Fill in this section
-
-# NVM
-# FIXME Fill in this section
+sudo npm install -g @angular/cli
 
 # PYENV
-# FIXME Fill in this section
+curl -fsSL https://pyenv.run | bash
+cd ~
+pyenv install 3.11
 
 # BEYOND COMPARE
 wget https://www.scootersoftware.com/files/bcompare-5.1.2.31185_amd64.deb

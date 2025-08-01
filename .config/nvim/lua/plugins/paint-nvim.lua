@@ -5,6 +5,11 @@ return {
     highlights = {
       {
         filter = { filetype = "markdown" },
+        pattern = "(SOURCE)",
+        hl = "@text.warning",
+      },
+      {
+        filter = { filetype = "markdown" },
         pattern = "(╭───╮)",
         hl = "@text.reference",
       },
@@ -30,13 +35,33 @@ return {
       },
       {
         filter = { filetype = "markdown" },
-        pattern = "(.3V3)",
+        pattern = "(+3V3)",
         hl = "@text.warning",
       },
       {
         filter = { filetype = "markdown" },
         pattern = "(.5V)",
         hl = "@text.danger",
+      },
+      {
+        filter = { filetype = "markdown" },
+        pattern = "(VBUS)",
+        hl = "@text.danger",
+      },
+      {
+        filter = { filetype = "markdown" },
+        pattern = "(VSYS)",
+        hl = "@text.danger",
+      },
+      {
+        filter = { filetype = "markdown" },
+        pattern = "RUN",
+        hl = "lualine_a_visual",
+      },
+      {
+        filter = { filetype = "markdown" },
+        pattern = "3V3_EN",
+        hl = "lualine_a_visual",
       },
     },
   }

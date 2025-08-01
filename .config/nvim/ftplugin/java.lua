@@ -16,7 +16,7 @@ local config = {
   -- The command that starts the language server
   -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
   cmd = {
-    'java',
+    '/usr/lib/jvm/java-21-openjdk-amd64/bin/java',
     '-Declipse.application=org.eclipse.jdt.ls.core.id1',
     '-Dosgi.bundles.defaultStartLevel=4',
     '-Declipse.product=org.eclipse.jdt.ls.core.product',
@@ -42,7 +42,7 @@ local config = {
   -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
   settings = {
     java = {
-      home = '/usr/lib/jvm/java-17-openjdk-amd64',
+      home = '/usr/lib/jvm/java-21-openjdk-amd64',
       eclipse = {
         downloadSources = true,
       },
@@ -61,6 +61,10 @@ local config = {
           {
             name = "JavaSE-19",
             path = "/usr/lib/jvm/java-19-openjdk-amd64",
+          },
+          {
+            name = "JavaSE-21",
+            path = "/usr/lib/jvm/java-21-openjdk-amd64",
           }
         }
       },
@@ -85,36 +89,35 @@ local config = {
         --   profile = "GoogleStyle",
         -- },
       },
-    },
-    completion = {
-      favoriteStaticMembers = {
-        "org.hamcrest.MatcherAssert.assertThat",
-        "org.hamcrest.Matchers.*",
-        "org.hamcrest.CoreMatchers.*",
-        "org.junit.jupiter.api.Assertions.*",
-        "java.util.Objects.requireNonNull",
-        "java.util.Objects.requireNonNullElse",
-        "org.mockito.Mockito.*",
+      completion = {
+        favoriteStaticMembers = {
+          "org.hamcrest.MatcherAssert.assertThat",
+          "org.hamcrest.Matchers.*",
+          "org.hamcrest.CoreMatchers.*",
+          "org.junit.jupiter.api.Assertions.*",
+          "java.util.Objects.requireNonNull",
+          "java.util.Objects.requireNonNullElse",
+          "org.mockito.Mockito.*",
+        },
+        importOrder = {
+          "java",
+          "javax",
+          "com",
+          "org",
+        },
       },
-      importOrder = {
-        "java",
-        "javax",
-        "com",
-        "org"
+      sources = {
+        organizeImports = {
+          starThreshold = 9999,
+          staticStarThreshold = 9999,
+        },
       },
-    },
-    extendedClientCapabilities = jdtls.extendedClientCapabilities,
-    sources = {
-      organizeImports = {
-        starThreshold = 9999,
-        staticStarThreshold = 9999,
+      codeGeneration = {
+        toString = {
+          template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}",
+        },
+        useBlocks = true,
       },
-    },
-    codeGeneration = {
-      toString = {
-        template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}",
-      },
-      useBlocks = true,
     },
   },
   -- Needed for auto-completion with method signatures and placeholders
@@ -124,7 +127,8 @@ local config = {
   },
   init_options = {
     -- References the bundles defined above to support Debugging and Unit Testing
-    bundles = bundles
+    bundles = bundles,
+    extendedClientCapabilities = jdtls.extendedClientCapabilities,
   },
 }
 

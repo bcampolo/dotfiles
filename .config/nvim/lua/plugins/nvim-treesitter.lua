@@ -18,6 +18,7 @@ return {
       'lua',
       'comment',
     },
+    ignore_install = { "csv" }, -- Using cameron-wags/rainbow_csv.nvim for CSV highlighting
   },
   config = function (_, opts)
     local configs = require("nvim-treesitter.configs")

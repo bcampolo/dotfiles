@@ -92,6 +92,15 @@ return {
     local dap = require('dap')
     require('dapui').setup(opts)
 
+    -- Customize breakpoint signs
+    vim.api.nvim_set_hl(0, "DapStoppedHl", { fg = "#98BB6C", bg = "#2A2A2A", bold = true })
+    vim.api.nvim_set_hl(0, "DapStoppedLineHl", { bg = "#204028", bold = true })
+    vim.fn.sign_define('DapStopped', { text='', texthl='DapStoppedHl', linehl='DapStoppedLineHl', numhl= '' })
+    vim.fn.sign_define('DapBreakpoint', { text='', texthl='DiagnosticSignError', linehl='', numhl='' })
+    vim.fn.sign_define('DapBreakpointCondition', { text='', texthl='DiagnosticSignWarn', linehl='', numhl='' })
+    vim.fn.sign_define('DapBreakpointRejected', { text='', texthl='DiagnosticSignError', linehl='', numhl= '' })
+    vim.fn.sign_define('DapLogPoint', { text='', texthl='DiagnosticSignInfo', linehl='', numhl= '' })
+
     dap.listeners.after.event_initialized["dapui_config"] = function()
       require('dapui').open()
     end
@@ -120,6 +129,41 @@ return {
 
     dap.configurations.java = {
       {
+        name = "Debug (2GB)";
+        type = 'java';
+        request = 'launch';
+        vmArgs = "" ..
+          "-Xmx2g "
+      },
+      {
+        name = "Debug (4GB)";
+        type = 'java';
+        request = 'launch';
+        vmArgs = "" ..
+          "-Xmx4g "
+      },
+      {
+        name = "Debug (8GB)";
+        type = 'java';
+        request = 'launch';
+        vmArgs = "" ..
+          "-Xmx8g "
+      },
+      {
+        name = "Debug Attach (8000)";
+        type = 'java';
+        request = 'attach';
+        hostName = "127.0.0.1";
+        port = 8000;
+      },
+      {
+        name = "Debug Attach (5005)";
+        type = 'java';
+        request = 'attach';
+        hostName = "127.0.0.1";
+        port = 5005;
+      },
+      {
         name = "Starship Empire Server",
         type = "java",
         request = "launch",
@@ -146,20 +190,6 @@ return {
           "-Dstarshipempire.steam.api.appid=1882170 " ..
           "-Dstarshipempire.port=8080 " ..
           "-Dstarshipempire.shared.path=/home/bcampolo/git/starshipempire/shared "
-      },
-      {
-        name = "Debug Attach (8001)";
-        type = 'java';
-        request = 'attach';
-        hostName = "127.0.0.1";
-        port = 8001;
-      },
-      {
-        name = "Debug (12GB)";
-        type = 'java';
-        request = 'launch';
-        vmArgs = "" ..
-          "-Xmx12g "
       },
     }
   end
