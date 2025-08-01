@@ -1,5 +1,6 @@
 -- Commonly used command picker
 return {
+  -- https://github.com/DanWlker/toolbox.nvim
   'DanWlker/toolbox.nvim',
   keys = {
     {

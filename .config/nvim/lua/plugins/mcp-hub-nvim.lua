@@ -1,4 +1,5 @@
 return {
+  -- https://github.com/ravitemer/mcphub.nvim
   "ravitemer/mcphub.nvim",
   dependencies = {
     "nvim-lua/plenary.nvim",

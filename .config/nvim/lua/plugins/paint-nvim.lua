@@ -1,4 +1,5 @@
 return {
+  -- https://github.com/folke/paint.nvim
   'folke/paint.nvim',
   event = 'VeryLazy',
   opts = {
@@ -6,22 +7,22 @@ return {
       {
         filter = { filetype = "markdown" },
         pattern = "(SOURCE)",
-        hl = "@text.warning",
+        hl = "@comment.warning",
       },
       {
         filter = { filetype = "markdown" },
         pattern = "(╭───╮)",
-        hl = "@text.reference",
+        hl = "@property",
       },
       {
         filter = { filetype = "markdown" },
         pattern = "(│)",
-        hl = "@text.reference",
+        hl = "@property",
       },
       {
         filter = { filetype = "markdown" },
         pattern = "(╰───╯)",
-        hl = "@text.reference",
+        hl = "@property",
       },
       {
         filter = { filetype = "markdown" },
@@ -36,22 +37,22 @@ return {
       {
         filter = { filetype = "markdown" },
         pattern = "(+3V3)",
-        hl = "@text.warning",
+        hl = "@comment.warning",
       },
       {
         filter = { filetype = "markdown" },
         pattern = "(.5V)",
-        hl = "@text.danger",
+        hl = "@comment.error",
       },
       {
         filter = { filetype = "markdown" },
         pattern = "(VBUS)",
-        hl = "@text.danger",
+        hl = "@comment.error",
       },
       {
         filter = { filetype = "markdown" },
         pattern = "(VSYS)",
-        hl = "@text.danger",
+        hl = "@comment.error",
       },
       {
         filter = { filetype = "markdown" },

@@ -80,10 +80,8 @@ return {
     ]])
 
     -- Custom border colors
-    vim.cmd([[
-      autocmd ColorScheme * hi NormalFloat guifg=#F9E7C0 guibg=#1F1F1F
-      autocmd ColorScheme * hi FloatBorder guifg=#F9E7C0 guibg=#1F1F1F
-    ]])
+    vim.api.nvim_set_hl(0, "NormalFloat", { fg = "#F9E7C0", bg = "NONE" })
+    vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#F9E7C0", bg = "NONE" })
   end
 }
 

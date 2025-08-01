@@ -1,4 +1,5 @@
 return {
+  -- https://github.com/cameron-wags/rainbow_csv.nvim
   'cameron-wags/rainbow_csv.nvim',
   ft = {
     'csv',

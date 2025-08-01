@@ -23,7 +23,7 @@ return {
     -- https://github.com/folke/neodev.nvim
     { 'folke/neodev.nvim', opts = {} },
   },
-  config = function ()
+  config = function()
     require('mason').setup()
     require('mason-lspconfig').setup({
       -- Install these LSPs automatically
@@ -39,7 +39,7 @@ return {
         'lemminx',
         'marksman',
         'quick_lint_js',
-        'tsserver',
+        'ts_ls',
         'yamlls',
         'pyright',
       }
@@ -63,34 +63,29 @@ return {
     -- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim/issues/39
     vim.api.nvim_command('MasonToolsInstall')
 
-    local lspconfig = require('lspconfig')
-    local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
-    local lsp_attach = function(client, bufnr)
-      -- Create your keybindings here...
-    end
+    -- local lspconfig = require('lspconfig')
+    local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
     -- Call setup on each LSP server
-    for _, server_name in ipairs(require('mason-lspconfig').get_installed_servers()) do
+    for _, server in ipairs(require('mason-lspconfig').get_installed_servers()) do
       -- Don't call setup for JDTLS Java LSP because it will be setup from a separate config
-      if server_name ~= 'jdtls' then
-        lspconfig[server_name].setup({
-          on_attach = lsp_attach,
-          capabilities = lsp_capabilities,
+      if server ~= 'jdtls' then
+        vim.lsp.config(server, {
+          capabilities = capabilities
         })
       end
     end
 
     -- Lua LSP settings
-    lspconfig.lua_ls.setup {
+    vim.lsp.config("lua_ls", {
       settings = {
         Lua = {
           diagnostics = {
-            -- Get the language server to recognize the `vim` global
-            globals = {'vim'},
-          },
-        },
+            globals = { "vim" } }
+        }
       },
-    }
+      capabilities = capabilities
+    })
 
     -- Globally configure all LSP floating preview popups (like hover, signature help, etc)
     local open_floating_preview = vim.lsp.util.open_floating_preview

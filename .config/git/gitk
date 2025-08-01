@@ -56,9 +56,9 @@ set web_browser xdg-open
 set geometry(main) 1920x982+0+0
 set geometry(state) normal
 set geometry(topwidth) 1918
-set geometry(topheight) 225
-set geometry(pwsash0) "671 1"
-set geometry(pwsash1) "1007 1"
+set geometry(topheight) 257
+set geometry(pwsash0) "1347 1"
+set geometry(pwsash1) "1700 1"
 set geometry(botwidth) 1363
-set geometry(botheight) 745
+set geometry(botheight) 713
 set permviews {}
