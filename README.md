@@ -16,7 +16,6 @@ These are my personal dotfiles.
 
     ```sh
     curl https://github.com/bcampolo/dotfiles/blob/main/new-pc-setup.sh
-    https://github.com/bcampolo/nvim-starter-kit/blob/main/.config/nvim/lazy-lock.json
     chmod +x new-pc-setup.sh
     ./new-pc-setup.sh main
     ```
