@@ -15,7 +15,7 @@ These are my personal dotfiles.
 - If you are **NOT** starting from scratch and want to replace your current configurations, make proper backups:
 
     ```sh
-    curl https://github.com/bcampolo/dotfiles/blob/main/new-pc-setup.sh
+    curl -o new-pc-setup.sh https://github.com/bcampolo/dotfiles/blob/main/new-pc-setup.sh 
     chmod +x new-pc-setup.sh
     ./new-pc-setup.sh main
     ```
