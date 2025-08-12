@@ -16,6 +16,7 @@ These are my personal dotfiles.
 
     ```sh
     curl -o new-pc-setup.sh https://github.com/bcampolo/dotfiles/blob/main/new-pc-setup.sh 
+    # Update the email/username in the .gitconfig file
     chmod +x new-pc-setup.sh
     ./new-pc-setup.sh main
     ```
