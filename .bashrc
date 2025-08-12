@@ -65,10 +65,10 @@ unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*)
+  xterm*|rxvt*)
     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
     ;;
-*)
+  *)
     ;;
 esac
 
@@ -84,23 +84,13 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
 # Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
@@ -111,22 +101,20 @@ alias sse='steam -dev "steam://rungameid/1882170"'
 alias sshsse='ssh root@45.33.3.103'
 ################################################
 
-#Git Hub
+# GIT HUB
 alias pullrequest='sh -c '\''repo="$(basename $(git rev-parse --show-toplevel))"; branch="$(git branch | grep \* | cut -d '\''\'\'''\'' '\''\'\'''\'' -f2)"; gh pr create --title "$1" --body "" --base "$2"'\'' _'
 alias pullrequestm='sh -c '\''repo="$(basename $(git rev-parse --show-toplevel))"; branch="$(git branch | grep \* | cut -d '\''\'\'''\'' '\''\'\'''\'' -f2)"; gh pr create --title "$1" --body "" --base "master"'\'' _'
 alias cleanupbranches='git branch | grep -v "dev" | grep -v "master" | xargs git branch -D; git branch -r | xargs -L 1 git branch -rD'
-##### BJC HELPERS ##############################
+
+# GENERIC TOOLS
 alias bkill='sh -c '\''kill -9 $(ps -ef | grep "$1" | grep -v grep | tr -s '\''\'\'''\'' '\''\'\'''\'' | cut -d '\''\'\'''\'' '\''\'\'''\'' -f 2 )'\'' _'
 alias bfar='sh -c '\''find ./ -type f -exec sed -i -e "s@$1@$2@g" {} \;'\'' _'
 alias bigfiles='sudo du -a / | sort -n -r | head -n 100'
-alias python='python3'
-################################################
 
-##### BJC UPDATES ##############################
+# FZF
 source /usr/share/doc/fzf/examples/key-bindings.bash
-################################################
 
-##### BJC PROMPT ###############################
+# GIT PROMPT
 export COLOR_WHITE='\[\e[0m\]'
 export COLOR_WHITE_RAW='\e[0m'
 export COLOR_RED='\[\e[0;31m\]'
@@ -172,43 +160,35 @@ PROMPT_COMMAND=prompt_command
 
 # After each command save the history
 export PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
-################################################
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
-fi
-. "$HOME/.cargo/env"
+# CUSTOM CA CERT FILE
+# export SSL_CERT_FILE="/usr/local/share/ca-certificates/name-of-ca-cert-file.crt"
 
-# Created by `userpath` on 2022-12-13 01:50:05
-export PATH="$PATH:/home/bcampolo/.local/bin:/opt/nvim/bin"
-export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"
- 
-# Set terminal to use vim motions
-set -o vi
+# Set default Java version
+export PATH="$PATH:/home/$USER/.local/bin:/opt/nvim/bin"
+export JAVA_HOME="/usr/lib/jvm/java-21-openjdk-amd64"
 
-# Set terminal to use tmux by default
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-  #exec tmux attach
-  exec tmux # uncomment if the above line is failing to start terminal
-fi
-
+# Load NodeJS and autocompletion
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Load Angular CLI autocompletion.
 source <(ng completion script)
 
 # PyEnv init
+alias python='python3'
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
+# Set terminal to use vim motions
+set -o vi
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Set terminal to use tmux by default
+if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+  if ! tmux has-session 2>/dev/null; then
+    exec tmux
+  fi
+fi
+
