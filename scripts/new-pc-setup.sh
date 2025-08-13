@@ -128,7 +128,15 @@ newgrp docker
 # CA CERTS
 # Placeholder
 
+# Hyper-V VM libs
+# sudo apt-get install -yy \
+  # linux-virtual \
+  # linux-cloud-tools-virtual \
+  # linux-tools-virual
+
 # REQUIRES INTERACTION
 sudo apt-get install -yy \
   gh
 gh auth login
+
+

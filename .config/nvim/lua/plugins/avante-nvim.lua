@@ -7,6 +7,7 @@ return {
   version = false, -- Never set this value to "*"! Never!
   opts = {
     provider = "openai",
+    -- provider = "copilot",
     providers = {
       openai = {
         model = "gpt-4o-mini",
@@ -20,6 +21,10 @@ return {
           max_completion_tokens = 10000,
           reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
         },
+      },
+      copilot = {
+        model = "gpt-4.1",
+        -- model = "gpt-4o-mini",
       },
     },
     -- MCP support
